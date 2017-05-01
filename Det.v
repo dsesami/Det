@@ -7,24 +7,23 @@
 `define WRITE_ADDRESS_POSITION 4'b1110 
 `define COUNTER_INIT_VALUE 4'b1110
 
-module Det (clock, reset,go,readAddress, writeAddress,WE,readbus,writebus,overflow,finished);
+module Det (clock, reset,go,readAddress, writeAddress,
+	    WE,readbus,writebus,overflow,finished);
+	input clock;
+	input reset; 
+    	input go;
 
-
-	input 			clock;
-	input		    reset; 
-    input           go;
-
-	input 	    [31:0] 	readbus;        // 32 bit read bus
-	output reg 	[31:0]	writebus;  	    //32-bit write bus
-	output reg  [6:0] 	readAddress; 	// read address
-	output reg  [6:0]	writeAddress; 	// write address
+	input 	   [31:0] 	readbus;        // 32 bit read bus
+	output reg [31:0]	writebus;  	    //32-bit write bus
+	output reg [6:0] 	readAddress; 	// read address
+	output reg [6:0]	writeAddress; 	// write address
 	
-    output reg  WE;
+    	output reg WE;
 
-    output     overflow; 	//overflow signal
-    output reg		finished;	//finished is high when operation is done.
+    	output     overflow; 	//overflow signal
+    	output reg finished;	//finished is high when operation is done.
         
-	reg [3:0] counter;  //4bit counter to iterate through SRAM	
+    reg [3:0] counter;  //4bit counter to iterate through SRAM	
 
     // for determinant input
     reg signed  [15:0] A, B, C;
